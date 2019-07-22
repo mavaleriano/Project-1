@@ -7,50 +7,104 @@ project 1 - A Random Quote Generator
 
 
 /*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
+ **** AIMING FOR EXCEEDS EXPECTATIONS GRADE ****
+ * 
+  Creating an array of objects (named quotess) with properties quote and source. Optional for at least one: citation and year
 ***/
 
-
+var quotes = [
+    {
+        quote: 'If You Are Working On Something That You Really Care about, You Don\t Have To Be Pushed. The Vision Pulls You',
+        source: 'Steve Jobs',
+        tags: '#Inspire#Lead'
+    },
+    {
+        quote: 'The Only Limit To Our Realization Of Tomorrow Will Be Our Doubts Of Today',
+        source: 'Franklin D. Roosevelt',
+        citation: 'Speech',
+        year: 1945,
+        tags: '#Doubt#Tomorrow#Limits'
+    },
+    {
+        quote: 'True Individual Freedom Cannot Exist Without Economic Security And Independence',
+        source: 'Franklin D. Roosevelt',
+        citation: 'Speech',
+        year: 1944,
+        tags: '#Freedom'
+    },
+    {
+        quote: 'Leadership Is Unlocking People\'s Potential To Become Better',
+        source: 'Bill Bradley',
+        tags: '#WhatIsLeadership'
+    },
+    {
+        quote: 'Think Little Goals And Expect Little Achievements. Think Big Goals And Win Big Success',
+        source: 'David Joseph Schwartz',
+        tags: '#Goals#DreamBig'
+    }
+];
 
 
 /***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
+  getRandomQuote() picks out a random quote from the array and returns that quote
 ***/
 
-
+function getRandomQuote() {
+    var randNum = Math.floor(Math.random() * quotes.length); //code for random number between 0-length of quote array
+    return quotes[randNum];
+}
 
 
 /***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
+  Getting random quote and setting up a variable to hold the html value before targeting the div in the HTML document 
 ***/
 
+function printQuote() {
+    randColor();
+    var randQuote = getRandomQuote();
+    var HTML = '';
 
+    HTML += '<p class="quote">' + randQuote.quote + '</p>';
+    HTML += '<p class="source">' + randQuote.source;
+    if (randQuote.hasOwnProperty('citation')) {
+        HTML += '<span class="citation">' + randQuote.citation + '</span>';
+    }
+    if (randQuote.hasOwnProperty('year')) {
+        HTML += '<span class="year">' + randQuote.year + '</span>';
+    }
+    HTML += '</p>';
+    HTML += '<p class="tags">' + randQuote.tags + '</p>';
 
+    document.getElementById('quote-box').innerHTML = HTML;
+}
 
 /***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
+  Randomly select background color
+  Sites that helped:
+  https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp -for using correct call to style background
+  https://stackoverflow.com/questions/1484506/random-color-generator -page used for inspiration for random color
+***/
+
+function randColor() {
+    var colorOpt = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+    var color = '#';
+    for (var i = 0; i < 6; i += 1) // Setting correct length for color
+    {
+        color += colorOpt[Math.floor(Math.random() * colorOpt.length)];
+    }
+    document.body.style.backgroundColor = color;
+}
+
+/***
+ Periodically resets the quote
+ Sites that helped:
+ https://www.w3schools.com/js/js_timing.asp - for using setInterval() method
+***/
+
+setInterval(printQuote, 20000);
+
+/***
+  Event listener to change quote at button click. Do not change code.
 ***/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
