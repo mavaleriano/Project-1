@@ -7,9 +7,10 @@ project 1 - A Random Quote Generator
 
 
 /*** 
- **** AIMING FOR EXCEEDS EXPECTATIONS GRADE ****
+ **** AIMING FOR EXCEEDS EXPECTATIONS ****
  * 
-  Creating an array of objects (named quotess) with properties quote and source. Optional for at least one: citation and year
+  Creating an array of objects (named quotes) with properties quote and source. Optional for at least one: citation and year
+  Added option tags for extra credit
 ***/
 
 var quotes = [
@@ -60,18 +61,21 @@ function getRandomQuote() {
 ***/
 
 function printQuote() {
-    randColor();
+    randColor(); // Calling function to change background color
     var randQuote = getRandomQuote();
     var HTML = '';
 
     HTML += '<p class="quote">' + randQuote.quote + '</p>';
     HTML += '<p class="source">' + randQuote.source;
+
     if (randQuote.hasOwnProperty('citation')) {
         HTML += '<span class="citation">' + randQuote.citation + '</span>';
     }
+
     if (randQuote.hasOwnProperty('year')) {
         HTML += '<span class="year">' + randQuote.year + '</span>';
     }
+
     HTML += '</p>';
     HTML += '<p class="tags">' + randQuote.tags + '</p>';
 
